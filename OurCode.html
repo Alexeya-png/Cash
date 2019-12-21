@@ -1,0 +1,93 @@
+<style>
+	table td {
+		padding: 20px;
+		border: 1dpx.solid black;
+	}
+</style>
+
+<table id='table'></table>
+
+<script>
+//идентификация банковской карты
+let identifBase = [1,]
+for (let i = 1; i <= 9999; i++) {
+	identifBase.push(identifBase[0] + i);
+	}
+
+	//!!
+let n = prompt("Вставьте карту", "");
+var a = identifBase.find ( function(e){return e==n} );
+alert("Ваша карта принята. Текущий баланс: 450 грн")
+
+
+
+//сеанс на кассе
+
+	table = document.querySelector('#table')
+	let arr = [["Наименование", "Стоимость", "Количество", "Цена"],]
+	let database = [
+	["Молоко 15% жир. 1 л.", "25 грн.", "1 шт.", 25],
+	["Вода негаз. 2.5 л.", "17 грн.", "2 шт.", 34],
+	["Лук репчатый", "45 грн", "0.8 кг", 36],
+	["Мыло", "10 грн", "1 шт.", 10], 
+	["Чай зеленый. 200 грамм.", "30 грн.", "4 шт.", 120],
+	["Шоколад Roshen", "25 грн", "1 шт.", 25],
+	["Мыло", "10 грн", "1 шт.", 10],
+	["Картофель", "5 грн", "1 кг.", 5], 
+]
+	function getRandomInt(max) {
+	return Math.floor(Math.random() * Math.floor(max));
+}
+
+
+let b = database.length;
+
+for (let t = 0; t < b; t++) {
+	var number = getRandomInt(b);
+	var check = 0;
+	//Чисто проверка на повторения
+	for (let k = 0; k < arr.length; k++) {
+		if (database[number] == arr[k]) {
+			check = check + 1;
+        }	
+		else continue
+	}
+	
+	if (check == 0) {
+	arr.push( database[number] );
+	}
+	var c = arr.length - 1;
+}
+
+let sum = 0;
+for (let i = 1; i <= c; i++) {
+	sum = sum + arr[i][3];
+	}
+arr.push( ["", "", "Всего:", sum, "Текущий баланс", 450 - sum])
+
+ 
+ 
+  
+  
+fillTable(table, arr);
+  
+function fillTable(table, arr) {
+	for (let i = 0; i < arr.length; i++) {
+		var tr = document.createElement('tr');
+
+		for (let j = 0; j < arr[i].length; j++) {
+			var td = document.createElement('td');
+			td.innerHTML = arr[i][j];
+			tr.appendChild(td);
+
+		}
+		table.appendChild(tr); 
+    }
+  }
+ 
+
+
+
+
+
+</script>
